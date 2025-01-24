@@ -72,7 +72,7 @@ io.on("connection", (socket) => {
     Query: ${data.messages[0].content} | 
     Response: ${response?.data?.choices?.length > 0 ? response?.data?.choices[0]?.message?.content: ""} | 
     Time Stamp: ${new Date()}
-    \n`;
+    \n ---------------------\n`;
     fs.appendFileSync(filePath, log);
 
   });
