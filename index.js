@@ -22,7 +22,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: "https://surajitdeveloper.github.io/",
+    origin: "https://surajitdeveloper.github.io",
     methods: ["GET", "POST"],
   },
 });
