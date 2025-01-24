@@ -76,7 +76,6 @@ io.on("connection", (socket) => {
     \n`;
     fs.appendFileSync(filePath, log);
 
-    
   });
 });
 
