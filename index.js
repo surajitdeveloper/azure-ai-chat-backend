@@ -68,7 +68,12 @@ io.on("connection", (socket) => {
           : "",
     }
     io.emit("receive_message", responseData);
-    const log = `Client ID: ${data.clientId} | Query: ${data.messages[0].content} | Response: ${response?.data?.choices?.length > 0 ? response?.data?.choices[0]?.message?.content: ""} | Time Stamp: ${new Date()}\n`;
+    const log = `
+    Client ID: ${data.clientId} | 
+    Query: ${data.messages[0].content} | 
+    Response: ${response?.data?.choices?.length > 0 ? response?.data?.choices[0]?.message?.content: ""} | 
+    Time Stamp: ${new Date()}
+    \n`;
     fs.appendFileSync(filePath, log);
 
     
