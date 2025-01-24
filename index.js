@@ -5,6 +5,7 @@ const cors = require("cors");
 const http = require("http");
 const { Server } = require("socket.io");
 const axios = require("axios");
+const fs = require('node:fs');
 
 const aiEndpoint =
   "https://ai-surajitai526010179468.openai.azure.com/openai/deployments/gpt-4/chat/completions?api-version=2024-08-01-preview";
@@ -20,6 +21,8 @@ app.use(express.json());
 
 const server = http.createServer(app);
 
+const filePath = './logs.log';
+
 const io = new Server(server, {
   cors: {
     origin: "https://surajitdeveloper.github.io",
@@ -31,11 +34,15 @@ app.get("/", (req, res) => {
   res.send("Server is running");
 });
 
+app.get("/logs", (req, res) => {
+  res.send(fs.readFileSync(filePath, 'utf8'));
+})
+
 io.on("connection", (socket) => {
-  console.log("User connected ", socket.id);
+  // console.log("User connected ", socket.id);
 
   socket.on("send_message", async (data) => {
-    console.log("Message Received ", data);
+    // console.log("Message Received ", data);
     if (data.messages.length === 0) return;
     const response = await axios.post(
       aiEndpoint,
@@ -51,16 +58,20 @@ io.on("connection", (socket) => {
         },
       }
     );
-    console.log("Response from AI ", response?.data?.choices[0]?.message);
-
-    io.emit("receive_message", {
+    // console.log("Response from AI ", response?.data?.choices[0]?.message);
+    const responseData = {
       clientId: data.clientId,
       query: data.messages[0].content,
       response:
         response?.data?.choices?.length > 0
           ? response?.data?.choices[0]?.message?.content
           : "",
-    });
+    }
+    io.emit("receive_message", responseData);
+    const log = `Client ID: ${data.clientId} | Query: ${data.messages[0].content} | Response: ${response?.data?.choices?.length > 0 ? response?.data?.choices[0]?.message?.content: ""} | Time Stamp: ${new Date()}\n`;
+    fs.appendFileSync(filePath, log);
+
+    
   });
 });
 
