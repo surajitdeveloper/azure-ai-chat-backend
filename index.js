@@ -9,7 +9,7 @@ const axios = require("axios");
 const aiEndpoint =
   "https://ai-surajitai526010179468.openai.azure.com/openai/deployments/gpt-4/chat/completions?api-version=2024-08-01-preview";
 const apiKey =
-  "9sSLE88DivbuRjsEsM84duv8AcCdMICrdz2i3FvvTC6JeCzvq9NnJQQJ99BAACHYHv6XJ3w3AAAAACOGqKKE ";
+  "9sSLE88DivbuRjsEsM84duv8AcCdMICrdz2i3FvvTC6JeCzvq9NnJQQJ99BAACHYHv6XJ3w3AAAAACOGqKKE";
 
 const PORT = process.env.PORT || 4000;
 
