@@ -40,7 +40,6 @@ app.get("/logs", (req, res) => {
 
 io.on("connection", (socket) => {
   // console.log("User connected ", socket.id);
-
   socket.on("send_message", async (data) => {
     // console.log("Message Received ", data);
     if (data.messages.length === 0) return;
