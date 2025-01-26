@@ -6,14 +6,18 @@ const http = require("http");
 const { Server } = require("socket.io");
 const axios = require("axios");
 const fs = require("node:fs");
+const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 const aiEndpoint =
   "https://ai-surajitai526010179468.openai.azure.com/openai/deployments/gpt-4/chat/completions?api-version=2024-08-01-preview";
 const apiKey =
   "9sSLE88DivbuRjsEsM84duv8AcCdMICrdz2i3FvvTC6JeCzvq9NnJQQJ99BAACHYHv6XJ3w3AAAAACOGqKKE";
 
+  const genAI = new GoogleGenerativeAI("AIzaSyCp5l6GGuZ_IKIJwolnQ0pYbR__FhGBAt8");
+  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+
 // const origin = ["https://surajitdeveloper.github.io", "http://localhost:3000"];
-const origin =  ["https://surajitdeveloper.github.io"]
+const origin =  ["https://surajitdeveloper.github.io"];
 
 const PORT = process.env.PORT || 4000;
 
@@ -26,6 +30,10 @@ const server = http.createServer(app);
 
 const filePath = "./logs.log";
 
+const writeLog = (log) => {
+  fs.appendFileSync(filePath, log);
+}
+
 const io = new Server(server, {
   cors: {
     origin: origin,
@@ -36,6 +44,26 @@ const io = new Server(server, {
 app.get("/", (req, res) => {
   res.send("Server is running");
 });
+
+app.post("/get-gemini",(req,res)=>{
+  
+
+  const prompt = req.body.prompt;
+
+
+  model.generateContent(prompt).then((result) => {
+    const log = `
+    AI: Gemini |
+    Query: ${req.body.prompt} | 
+    Response: ${
+      result.response.text()
+    } | 
+    Time Stamp: ${new Date()}
+    \n`;
+    writeLog(log);
+    res.send({result: result.response.text()});
+  });
+})
 
 app.get("/logs", (req, res) => {
   res.send(fs.readFileSync(filePath, "utf8")?.replace(/\n/g, "<br />"));
@@ -78,6 +106,7 @@ io.on("connection", (socket) => {
     io.emit("receive_message", responseData);
     const log = `
     Client ID: ${data.clientId} | 
+    AI: Azure |
     Query: ${data.messages[0].content} | 
     Response: ${
       response?.data?.choices?.length > 0
@@ -86,7 +115,7 @@ io.on("connection", (socket) => {
     } | 
     Time Stamp: ${new Date()}
     \n`;
-    fs.appendFileSync(filePath, log);
+    writeLog(log);
   });
 });
 
@@ -95,3 +124,5 @@ server.listen(PORT, () => {
 });
 
 module.exports = server;
+
+
