@@ -10,14 +10,24 @@ exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
+const socket_service_1 = require("./socket/socket/socket.service");
+const socket_module_1 = require("./socket/socket/socket.module");
+const http_module_1 = require("./http.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [],
+        imports: [socket_module_1.SocketModule,
+            http_module_1.HttpModule.forFeature({
+                serviceName: 'CustomHttpService',
+                config: {
+                    enableLogging: true,
+                },
+            })
+        ],
         controllers: [app_controller_1.AppController],
-        providers: [app_service_1.AppService],
+        providers: [app_service_1.AppService, socket_service_1.SocketService],
     })
 ], AppModule);
 //# sourceMappingURL=app.module.js.map
