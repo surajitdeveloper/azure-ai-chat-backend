@@ -22,9 +22,10 @@ exports.AppModule = AppModule = __decorate([
             http_module_1.HttpModule.forFeature({
                 serviceName: 'CustomHttpService',
                 config: {
+                    baseURL: 'https://api.example.com',
                     enableLogging: true,
                 },
-            })
+            }),
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService, socket_service_1.SocketService],
