@@ -16,8 +16,10 @@ export class SocketService {
 
     console.log("socket connected", clientId);
     socket.on("send_message", async (data) => {
-        console.log("Socket referer ", socket.handshake.headers);
-        console.log("Message Received ", data);
+        // console.log("Socket referer ", socket.handshake.headers);
+        // console.log("Message Received ", data);
+        // console.log("axios conf --->", this.configService.get<string>('db.mongo'))
+        // console.log("axios conf --->", )
         
         if (data.messages.length === 0) return;
 
@@ -26,9 +28,9 @@ export class SocketService {
                 temperature: 0.7,
                 max_tokens: 100,
               }
-
+        
         const response: any = await this.httpService.post(
-          `http://65.21.248.37:8181/v1/chat/completions`,payload
+          `${this.configService.get<string>('ai.deepseek')}/v1/chat/completions`,payload
         )
         
         const aiResponse = response?.data?.choices[0]?.message?.content || ''

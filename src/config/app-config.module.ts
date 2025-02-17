@@ -5,7 +5,6 @@ import configuration from './configuration';
     imports: [
         ConfigModule.forRoot({
             load: [configuration], 
-            envFilePath: '.env',
             isGlobal: true,
         })
     ]

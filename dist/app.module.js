@@ -13,12 +13,14 @@ const app_service_1 = require("./app.service");
 const socket_service_1 = require("./socket/socket/socket.service");
 const socket_module_1 = require("./socket/socket/socket.module");
 const http_module_1 = require("./http.module");
+const app_config_module_1 = require("./config/app-config.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [socket_module_1.SocketModule,
+            app_config_module_1.AppConfigModule,
             http_module_1.HttpModule.forFeature({
                 serviceName: 'CustomHttpService',
                 config: {
