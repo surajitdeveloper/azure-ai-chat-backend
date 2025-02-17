@@ -5,10 +5,9 @@ export class CreateUsertDto {
     @IsNotEmpty()
     readonly email: string;
     @IsNumber()
-    @IsNotEmpty()
     readonly phonenumber: number;
     
-    @IsNumber()
+    @IsString()
     @IsNotEmpty()
     readonly password: string;
 }
