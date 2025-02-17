@@ -100,3 +100,5 @@ Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
 
 
 https://dev.to/ezilemdodana/deploying-nestjs-apps-to-heroku-a-comprehensive-guide-hhj
+
+https://bhargavacharyb.medium.com/configuring-configmodule-in-nestjs-94dbb7e7c19a
