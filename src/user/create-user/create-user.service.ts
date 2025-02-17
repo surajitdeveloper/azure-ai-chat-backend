@@ -7,41 +7,37 @@ import {IUser} from "../../interface/userinterface"
 
 @Injectable()
 export class CreateUserService {
-
-
     constructor(@InjectModel('User') private userModel:Model<IUser>) { }
-    async createStudent(createUsertDto: CreateUsertDto): Promise<IUser> {
-       const newStudent = await new this.userModel(createUsertDto);
-       return newStudent.save();
+    async createUser(createUsertDto: CreateUsertDto): Promise<IUser> {
+       const newUser = await new this.userModel(createUsertDto);
+       return newUser.save();
     }
-    async updateStudent(studentId: string, updateUsertDto: UpdateUsertDto): Promise<IUser> {
-        const existingStudent = await        this.userModel.findByIdAndUpdate(studentId, updateUsertDto, { new: true });
-       if (!existingStudent) {
-         throw new NotFoundException(`Student #${studentId} not found`);
+    async updateUser(userId: string, updateUsertDto: UpdateUsertDto): Promise<IUser> {
+        const existingUser = await        this.userModel.findByIdAndUpdate(userId, updateUsertDto, { new: true });
+       if (!existingUser) {
+         throw new NotFoundException(`User #${userId} not found`);
        }
-       return existingStudent;
+       return existingUser;
     }
-    async getAllStudents(): Promise<IUser[]> {
-        const studentData = await this.userModel.find();
-        if (!studentData || studentData.length == 0) {
-            throw new NotFoundException('Students data not found!');
+    async getAllUser(): Promise<IUser[]> {
+        const userData = await this.userModel.find();
+        if (!userData || userData.length == 0) {
+            throw new NotFoundException('User data not found!');
         }
-        return studentData;
+        return userData;
     }
-    async getStudent(studentId: string): Promise<IUser> {
-       const existingStudent = await     this.userModel.findById(studentId).exec();
-       if (!existingStudent) {
-        throw new NotFoundException(`Student #${studentId} not found`);
+    async getUser(userId: string): Promise<IUser> {
+       const existingUser = await     this.userModel.findById(userId).exec();
+       if (!existingUser) {
+        throw new NotFoundException(`User #${userId} not found`);
        }
-       return existingStudent;
+       return existingUser;
     }
-    async deleteStudent(studentId: string): Promise<IUser> {
-        const deletedStudent = await this.userModel.findByIdAndDelete(studentId);
-       if (!deletedStudent) {
-         throw new NotFoundException(`Student #${studentId} not found`);
+    async deleteUser(userId: string): Promise<IUser> {
+        const deletedUser = await this.userModel.findByIdAndDelete(userId);
+       if (!deletedUser) {
+         throw new NotFoundException(`User #${userId} not found`);
        }
-       return deletedStudent;
+       return deletedUser;
     }
-
-
 }
