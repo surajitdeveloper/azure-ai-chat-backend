@@ -1,4 +1,13 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 
 @Controller('create-user')
-export class CreateUserController {}
+export class CreateUserController {
+    @Get()
+    getHello(): string {
+      return 'create user';
+    }
+    @Get('create-user')
+    get(): string {
+      return 'create user create';
+    }
+}
