@@ -1,12 +1,14 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { Socket } from 'socket.io';
 import {HttpService} from "../../http.service"
+import { ConfigService } from '@nestjs/config';
 @Injectable()
 export class SocketService {
     private readonly connectedClients: Map<string, Socket> = new Map();
     constructor(
         @Inject('CustomHttpService')
         private readonly httpService: HttpService,
+        private readonly configService:ConfigService
       ) {}
   handleConnection(socket: Socket): void {
     const clientId = socket.id;
@@ -26,7 +28,7 @@ export class SocketService {
               }
 
         const response: any = await this.httpService.post(
-          "http://65.21.248.37:8181/v1/chat/completions",payload
+          `http://65.21.248.37:8181/v1/chat/completions`,payload
         )
         
         const aiResponse = response?.data?.choices[0]?.message?.content || ''
