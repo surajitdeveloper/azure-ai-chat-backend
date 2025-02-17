@@ -1,17 +1,17 @@
 import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Res } from '@nestjs/common';
 import { CreateUsertDto } from 'src/dto/create-user.dto';
 import { UpdateUsertDto } from 'src/dto/update-user.dto';
-import {CreateUserService} from "./create-user.service"
+import {UserService} from "../user.service"
 
 @Controller('create-user')
 export class CreateUserController {
     
     
-    constructor(private readonly createUserService: CreateUserService) { }
+    constructor(private readonly userService: UserService) { }
 @Post()
    async createUser(@Res() response, @Body() createUsertDto: CreateUsertDto) {
   try {
-    const newUser = await this.createUserService.createUser(createUsertDto);
+    const newUser = await this.userService.createUser(createUsertDto);
     return response.status(HttpStatus.CREATED).json({
     message: 'User has been created successfully',
     newUser,});
@@ -27,7 +27,7 @@ export class CreateUserController {
 async updateUser(@Res() response,@Param('id') userId: string,
 @Body() updateUsertDto: UpdateUsertDto) {
   try {
-   const existingUser = await this.createUserService.updateUser(userId, updateUsertDto);
+   const existingUser = await this.userService.updateUser(userId, updateUsertDto);
   return response.status(HttpStatus.OK).json({
   message: 'User has been successfully updated',
   existingUser,});
@@ -38,7 +38,7 @@ async updateUser(@Res() response,@Param('id') userId: string,
 @Get()
 async getUser(@Res() response) {
 try {
-  const userData = await this.createUserService.getAllUser();
+  const userData = await this.userService.getAllUser();
   return response.status(HttpStatus.OK).json({
   message: 'All user data found successfully',userData,});
  } catch (err) {
@@ -48,7 +48,7 @@ try {
 @Get('/:id')
 async getUserById(@Res() response, @Param('id') userId: string) {
  try {
-    const existingUser = await this.createUserService.getUser(userId);
+    const existingUser = await this.userService.getUser(userId);
     return response.status(HttpStatus.OK).json({
     message: 'User found successfully',existingUser,});
  } catch (err) {
@@ -59,7 +59,7 @@ async getUserById(@Res() response, @Param('id') userId: string) {
 async deleteUser(@Res() response, @Param('id') userId: string)
 {
   try {
-    const deletedUser = await this.createUserService.deleteUser(userId);
+    const deletedUser = await this.userService.deleteUser(userId);
     return response.status(HttpStatus.OK).json({
     message: 'User deleted successfully',
     deletedUser,});

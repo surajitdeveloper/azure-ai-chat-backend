@@ -6,7 +6,7 @@ import { SocketModule } from './socket/socket/socket.module';
 import { HttpModule } from './http.module';
 import {AppConfigModule} from "./config/app-config.module";
 import { CreateUserController } from './user/create-user/create-user.controller';
-import {CreateUserService} from "./user/create-user/create-user.service"
+import {UserService} from "./user/user.service"
 import { MongooseModule } from '@nestjs/mongoose';
 import { UserSchema, User } from './schema/user.schema';
 @Module({
@@ -22,6 +22,6 @@ import { UserSchema, User } from './schema/user.schema';
     }),
   ],
   controllers: [AppController, CreateUserController],
-  providers: [AppService, SocketService, CreateUserService],
+  providers: [AppService, SocketService, UserService],
 })
 export class AppModule {}
