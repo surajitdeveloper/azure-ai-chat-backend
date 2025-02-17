@@ -6,7 +6,6 @@ export class CreateUsertDto {
     readonly email: string;
     @IsNumber()
     readonly phonenumber: number;
-    
     @IsString()
     @IsNotEmpty()
     readonly password: string;
