@@ -12,7 +12,7 @@ import { UserSchema, User } from './schema/user.schema';
 @Module({
   imports: [SocketModule,
     AppConfigModule,
-    MongooseModule.forRoot(`${process?.env?.MONGO_CONNECTION}`,{dbName: process?.env?.DB_NAME}),
+    MongooseModule.forRoot(`${process?.env?.MONGO_CONNECTION_OLD}`,{dbName: process?.env?.DB_NAME}),
     MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
     HttpModule.forFeature({
       serviceName: 'CustomHttpService',
