@@ -16,4 +16,5 @@ export interface ILogs extends Document {
     note: string;
     error: string;
     logtimestamp: string;
+    clientId: string;
 }

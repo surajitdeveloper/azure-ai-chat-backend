@@ -31,5 +31,7 @@ export class Logs {
    error: string;
    @Prop()
    logtimestamp: string;
+   @Prop()
+   clientId: string;
 }
 export const LogsSchema = SchemaFactory.createForClass(Logs);

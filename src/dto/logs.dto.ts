@@ -2,48 +2,50 @@ import { IsString, IsOptional } from "class-validator";
 export class LogsDto {
     @IsString()
     @IsOptional()
-    readonly user: string;
+     user: string;
     @IsString()
     @IsOptional()
-    readonly ai: string;
+     clientId: string;
     @IsString()
     @IsOptional()
-    readonly query: string;
+     ai: string;
     @IsString()
     @IsOptional()
-    readonly response: string;
+     query: string;
     @IsString()
     @IsOptional()
-    readonly querytimestamp: string;
+     response: string;
     @IsString()
     @IsOptional()
-    readonly responsestamp: string;
+     querytimestamp: string;
     @IsString()
     @IsOptional()
-    readonly ip: string;
+     responsestamp: string;
     @IsString()
     @IsOptional()
-    readonly location: string;
+     ip: string;
     @IsString()
     @IsOptional()
-    readonly deviceid: string;
+     location: string;
     @IsString()
     @IsOptional()
-    readonly browser: string;
+     deviceid: string;
     @IsString()
     @IsOptional()
-    readonly executedtime: string;
+     browser: string;
     @IsString()
     @IsOptional()
-    readonly status: string;    
+     executedtime: string;
     @IsString()
     @IsOptional()
-    readonly note: string;
+     status: string;  
+    @IsOptional()
+     note: any;
     @IsString()
     @IsOptional()
-    readonly error: string;
+     error: string;
     @IsString()
-    readonly logtimestamp: string
+     logtimestamp: string
 }
 
 
