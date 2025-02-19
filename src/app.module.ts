@@ -7,6 +7,8 @@ import { HttpModule } from './http.module';
 import {AppConfigModule} from "./config/app-config.module";
 import { UserController } from './user/user.controller';
 import {UserService} from "./user/user.service"
+import { LogsController } from './logs/logs.controller';
+import { LogsService } from './logs/logs.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UserSchema, User } from './schema/user.schema';
 import { LogsSchema, Logs } from './schema/logs.schema';
@@ -23,7 +25,7 @@ import { LogsSchema, Logs } from './schema/logs.schema';
       },
     }),
   ],
-  controllers: [AppController, UserController],
-  providers: [AppService, SocketService, UserService],
+  controllers: [AppController, UserController, LogsController],
+  providers: [AppService, SocketService, UserService, LogsService],
 })
 export class AppModule {}
