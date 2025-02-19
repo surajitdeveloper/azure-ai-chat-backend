@@ -2,10 +2,32 @@ import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose"
 @Schema()
 export class Logs {
    @Prop()
-   email: string;
+   user: string;
    @Prop()
-   phonenumber: number;
+   ai: string;
    @Prop()
-   password: string;
+   query: string;
+   @Prop()
+   response: string;
+   @Prop()
+   querytimestamp: string;
+   @Prop()
+   responsestamp: string;
+   @Prop()
+   ip: string;
+   @Prop()
+   location: string;
+   @Prop()
+   deviceid: string;
+   @Prop()
+   browser: string;
+   @Prop()
+   executedtime: string;
+   @Prop()
+   status: string;
+   @Prop()
+   note: string;
+   @Prop()
+   error: string;
 }
-export const UserSchema = SchemaFactory.createForClass(Logs);
+export const LogsSchema = SchemaFactory.createForClass(Logs);

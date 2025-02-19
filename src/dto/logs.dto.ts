@@ -1,5 +1,5 @@
 import { IsString } from "class-validator";
-export class CreateUsertDto {
+export class LogsDto {
     @IsString()
     readonly user: string;
     @IsString()
