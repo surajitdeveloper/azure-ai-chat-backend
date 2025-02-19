@@ -16,8 +16,12 @@ import { LogsService } from "./logs.service";
 export class LogsController {
   constructor(private readonly logsService: LogsService) {}
   @Post('/create')
-  async createLog(@Res() response, @Body() logsDto: LogsDto) {
+  async createLog(@Res() response, @Body() body) {
     try {
+      const logsDto: LogsDto = {
+        ...body,
+        timestamp: new Date().toISOString()
+      }
       const newLog = await this.logsService.createLog(logsDto);
         return response.status(HttpStatus.CREATED).json({
         message: "Log has been created successfully",

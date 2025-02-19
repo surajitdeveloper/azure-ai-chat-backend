@@ -29,5 +29,7 @@ export class Logs {
    note: string;
    @Prop()
    error: string;
+   @Prop()
+   logtimestamp: string;
 }
 export const LogsSchema = SchemaFactory.createForClass(Logs);

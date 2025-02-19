@@ -15,4 +15,5 @@ export interface ILogs extends Document {
     status: string;
     note: string;
     error: string;
+    logtimestamp: string;
 }
