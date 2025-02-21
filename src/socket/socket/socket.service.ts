@@ -60,7 +60,9 @@ export class SocketService {
       logs.note = {
         clientId: data.clientId,
         query: data.messages[0].content,
-        response: aiResponse,
+        response: response,
+        aiResponse: aiResponse,
+        payload: payload
       };
       logs.error = "";
       console.log("Response from AI ", aiResponse);
