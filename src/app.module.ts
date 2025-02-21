@@ -7,17 +7,16 @@ import { HttpModule } from './http.module';
 import {AppConfigModule} from "./config/app-config.module";
 import { UserController } from './user/user.controller';
 import {UserService} from "./user/user.service"
-import { LogsController } from './logs/logs.controller';
-import { LogsService } from './logs/logs.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UserSchema, User } from './schema/user.schema';
-import { LogsSchema, Logs } from './schema/logs.schema';
+import { LogsModule } from './logs/logs.module';
 @Module({
-  imports: [SocketModule,
+  imports: [
+    SocketModule,
     AppConfigModule,
+    LogsModule,
     MongooseModule.forRoot(`${process?.env?.MONGO_CONNECTION_OLD}`,{dbName: process?.env?.DB_NAME}),
     MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
-    MongooseModule.forFeature([{ name: Logs.name, schema: LogsSchema }]),
     HttpModule.forFeature({
       serviceName: 'CustomHttpService',
       config: {
@@ -25,7 +24,7 @@ import { LogsSchema, Logs } from './schema/logs.schema';
       },
     }),
   ],
-  controllers: [AppController, UserController, LogsController],
-  providers: [AppService, SocketService, UserService, LogsService],
+  controllers: [AppController, UserController],
+  providers: [AppService, SocketService, UserService],
 })
 export class AppModule {}

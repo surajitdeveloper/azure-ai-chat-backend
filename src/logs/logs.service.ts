@@ -6,7 +6,8 @@ import {ILogs} from "../interface/logsinterface"
 
 @Injectable()
 export class LogsService {
-    constructor(@InjectModel('Logs') private logsModel:Model<ILogs>) { }
+    constructor(@InjectModel('Logs') 
+    private logsModel:Model<ILogs>) { }
     async createLog(logsDto: LogsDto): Promise<ILogs> {
        const newLog = await new this.logsModel(logsDto);
        return newLog.save();

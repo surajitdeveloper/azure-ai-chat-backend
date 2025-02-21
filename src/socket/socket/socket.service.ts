@@ -7,11 +7,11 @@ import { LogsService } from "src/logs/logs.service";
 @Injectable()
 export class SocketService {
   private readonly connectedClients: Map<string, Socket> = new Map();
-  logsService: LogsService;
   constructor(
     @Inject("CustomHttpService")
     private readonly httpService: HttpService,
-    private readonly configService: ConfigService
+    private readonly configService: ConfigService,
+    private readonly logsService: LogsService
   ) {}
   handleConnection(socket: Socket): void {
     const clientId = socket.id;
@@ -60,7 +60,7 @@ export class SocketService {
       logs.note = {
         clientId: data.clientId,
         query: data.messages[0].content,
-        response: response,
+        // response: response,
         aiResponse: aiResponse,
         payload: payload
       };
