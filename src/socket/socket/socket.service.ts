@@ -57,13 +57,7 @@ export class SocketService {
       const aiResponse = response?.data?.choices[0]?.message?.content || "";
 
       logs.status = "success";
-      logs.note = {
-        clientId: data.clientId,
-        query: data.messages[0].content,
-        // response: response,
-        aiResponse: aiResponse,
-        payload: payload
-      };
+      logs.note = ''
       logs.error = "";
       console.log("Response from AI ", aiResponse);
       const responseData = {
