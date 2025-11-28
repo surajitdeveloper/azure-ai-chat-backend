@@ -19,12 +19,12 @@ let AppModule = class AppModule {
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [socket_module_1.SocketModule,
+        imports: [
+            socket_module_1.SocketModule,
             app_config_module_1.AppConfigModule,
             http_module_1.HttpModule.forFeature({
-                serviceName: 'CustomHttpService',
+                serviceName: "CustomHttpService",
                 config: {
-                    baseURL: 'https://api.example.com',
                     enableLogging: true,
                 },
             }),
