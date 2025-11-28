@@ -2,7 +2,11 @@ import { WebSocketGateway, OnGatewayConnection, WebSocketServer } from '@nestjs/
 import { Socket } from 'socket.io';
 import { SocketService } from './socket.service';
 
-@WebSocketGateway()
+@WebSocketGateway({
+  cors: {
+    origin: ['http://localhost:3000'],
+  },
+})
 export class SocketGateway implements OnGatewayConnection {
   @WebSocketServer()
   private server: Socket;
