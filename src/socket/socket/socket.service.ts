@@ -3,7 +3,6 @@ import { Socket } from "socket.io";
 import { HttpService } from "../../http.service";
 import { ConfigService } from "@nestjs/config";
 import { LogsDto } from "src/dto/logs.dto";
-import { LogsService } from "src/logs/logs.service";
 @Injectable()
 export class SocketService {
   private readonly connectedClients: Map<string, Socket> = new Map();
@@ -11,7 +10,6 @@ export class SocketService {
     @Inject("CustomHttpService")
     private readonly httpService: HttpService,
     private readonly configService: ConfigService,
-    private readonly logsService: LogsService
   ) {}
   handleConnection(socket: Socket): void {
     const clientId = socket.id;
@@ -39,6 +37,7 @@ export class SocketService {
       };
 
       const payload = {
+        model: "deepseek-r1-distill-llama-8b",
         messages: data.messages,
         temperature: 0.7,
         max_tokens: 100,
@@ -65,7 +64,6 @@ export class SocketService {
         query: data.messages[0].content,
         response: aiResponse,
       };
-      await this.logsService.createLog(logs);
       socket.emit(`receive_message_${data.clientId}`, responseData);
     });
 

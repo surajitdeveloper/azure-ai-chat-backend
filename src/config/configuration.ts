@@ -5,9 +5,7 @@ export default () => ({
     port: process.env.APP_PORT,
   },
   ai: {
-    deepseek: process.env.DEEP_SEEK_ENDPOINT,
+    openai: process.env.OPENAI_ENDPOINT,
   },
-  db: {
-    mongo: process.env.MONGO_CONNECTION,
-  },
+  secretKey: process.env.OPEN_KEY,
 });
