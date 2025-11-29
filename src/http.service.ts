@@ -19,14 +19,13 @@ export class HttpService {
   }
 
   private handleRequest(config: InternalAxiosRequestConfig): InternalAxiosRequestConfig {
-    console.info(`HTTP Request: ${config.method?.toUpperCase()} ${config.baseURL}${config.url}`);
+    console.info(`HTTP Request: ${config.method?.toUpperCase()} ${config.url}`);
     return config;
   }
 
   private handleResponse(response: AxiosResponse): AxiosResponse {
     console.info(
-      `HTTP Response: ${response.status} ${response.config.method?.toUpperCase()} ${response.config.baseURL}${
-        response.config.url
+      `HTTP Response: ${response.status} ${response.config.method?.toUpperCase()} ${response.config.url
       }`,
     );
     return response;
