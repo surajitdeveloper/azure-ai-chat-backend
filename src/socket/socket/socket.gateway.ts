@@ -4,14 +4,14 @@ import { SocketService } from './socket.service';
 
 @WebSocketGateway({
   cors: {
-    origin: ['http://localhost:3000'],
+    origin: ['http://localhost:3000', 'https://surajitdeveloper.github.io'],
   },
 })
 export class SocketGateway implements OnGatewayConnection {
   @WebSocketServer()
   private server: Socket;
 
-  constructor(private readonly socketService: SocketService) {}
+  constructor(private readonly socketService: SocketService) { }
 
   handleConnection(socket: Socket): void {
     this.socketService.handleConnection(socket);
